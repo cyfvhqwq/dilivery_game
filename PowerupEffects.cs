@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CourierCity.Powerups
 {
-    // ── Base class ──────────────────────────────────────────────────────────────
+
     public abstract class PowerupEffect : MonoBehaviour
     {
         [SerializeField] protected float duration = 6f;
@@ -11,7 +11,6 @@ namespace CourierCity.Powerups
         public abstract void Remove(Player.PlayerController player);
     }
 
-    // ── Lucky Box ───────────────────────────────────────────────────────────────
     public class LuckyBox : MonoBehaviour
     {
         [SerializeField] private PowerupEffect[] possibleEffects;
@@ -39,7 +38,7 @@ namespace CourierCity.Powerups
         }
     }
 
-    // ── Speed Boots ─────────────────────────────────────────────────────────────
+ 
     public class SpeedBootsEffect : PowerupEffect
     {
         [SerializeField] private float speedBonus = 2f;
@@ -47,26 +46,25 @@ namespace CourierCity.Powerups
         public override void Remove(Player.PlayerController p) => p.SpeedMultiplier -= speedBonus;
     }
 
-    // ── Invincibility ───────────────────────────────────────────────────────────
+ 
     public class InvincibilityEffect : PowerupEffect
     {
         public override void Apply(Player.PlayerController p) => p.IsInvincible = true;
         public override void Remove(Player.PlayerController p) => p.IsInvincible = false;
     }
 
-    // ── Dog Bone (distract aggressive animals) ──────────────────────────────────
+
     public class DogBoneEffect : PowerupEffect
     {
         public override void Apply(Player.PlayerController p)
         {
-            // Find all aggressive animals and distract them
+  
             foreach (var animal in FindObjectsByType<AggressiveAnimal>(FindObjectsSortMode.None))
                 animal.Distract(duration);
         }
-        public override void Remove(Player.PlayerController p) { /* Animals return on their own */ }
+        public override void Remove(Player.PlayerController p) {  }
     }
 
-    // ── Aggressive Animal (for DogBone to distract) ─────────────────────────────
     public class AggressiveAnimal : MonoBehaviour
     {
         [SerializeField] private float chaseSpeed = 3.5f;
@@ -107,10 +105,10 @@ namespace CourierCity.Powerups
         }
     }
 
-    // ── Ice Slide ───────────────────────────────────────────────────────────────
+
     public class IceSlideEffect : PowerupEffect
     {
-        [SerializeField] private GameObject icePatch; // visual overlay
+        [SerializeField] private GameObject icePatch; 
 
         private GameObject spawnedPatch;
 
@@ -120,7 +118,7 @@ namespace CourierCity.Powerups
             if (icePatch)
                 spawnedPatch = Instantiate(icePatch, p.transform.position, Quaternion.identity, p.transform);
 
-            // Also affect nearby vehicles / pedestrians via area trigger — simplified here
+
         }
 
         public override void Remove(Player.PlayerController p)
@@ -130,24 +128,23 @@ namespace CourierCity.Powerups
         }
     }
 
-    // ── Runaway Package ─────────────────────────────────────────────────────────
     public class RunawayPackageEffect : PowerupEffect
     {
         public override void Apply(Player.PlayerController p)
         {
             if (p.CarriedPackages.Count == 0) return;
-            // Pick a random carried package and make it flee
+
             var pkg = p.CarriedPackages[Random.Range(0, p.CarriedPackages.Count)];
             pkg.StartRunaway();
         }
 
-        public override void Remove(Player.PlayerController p) { /* Package catches itself on contact */ }
+        public override void Remove(Player.PlayerController p) {  }
     }
 
-    // ── Fog ─────────────────────────────────────────────────────────────────────
+ 
     public class FogEffect : PowerupEffect
     {
-        [SerializeField] private GameObject fogOverlayPrefab; // Dark sprite covering camera
+        [SerializeField] private GameObject fogOverlayPrefab; 
         [SerializeField] private float visibilityRadius = 2f;
 
         private GameObject fogInstance;
@@ -157,8 +154,7 @@ namespace CourierCity.Powerups
             if (fogOverlayPrefab)
             {
                 fogInstance = Instantiate(fogOverlayPrefab, p.transform);
-                // The overlay should be a large black sprite with a circular cutout shader
-                // (use a custom shader or URP 2D Light for the reveal area)
+
             }
         }
 
