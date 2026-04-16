@@ -10,7 +10,7 @@ namespace CourierCity.City
     {
         public CityEventType Type;
         public float Duration;
-        public float Weight = 1f; // relative spawn probability
+        public float Weight = 1f; 
     }
 
     public class RandomEventManager : MonoBehaviour
@@ -65,7 +65,6 @@ namespace CourierCity.City
         private IEnumerator HeavyRain(float duration)
         {
             var rain = rainParticlesPrefab ? Instantiate(rainParticlesPrefab) : null;
-            // Slow all players
             foreach (var p in FindObjectsByType<Player.PlayerController>(FindObjectsSortMode.None))
                 p.SpeedMultiplier = 0.6f;
 
@@ -78,7 +77,6 @@ namespace CourierCity.City
 
         private IEnumerator RoadAccident(float duration)
         {
-            // Pick a random road position
             Vector3 pos = GetRandomRoadPosition();
             var block = accidentBlockPrefab ? Instantiate(accidentBlockPrefab, pos, Quaternion.identity) : null;
             yield return new WaitForSeconds(duration);
@@ -110,7 +108,7 @@ namespace CourierCity.City
 
         private Vector3 GetRandomRoadPosition()
         {
-            // Placeholder: return a random point in a reasonable city area
+
             return new Vector3(Random.Range(-20f, 20f), Random.Range(-20f, 20f), 0f);
         }
     }
