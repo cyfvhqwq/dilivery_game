@@ -11,7 +11,7 @@ namespace CourierCity.Core
         public static GameManager Instance { get; private set; }
 
         [Header("Game Settings")]
-        [SerializeField] private float gameDuration = 180f; // 3 minutes
+        [SerializeField] private float gameDuration = 180f; 
         [SerializeField] private int penaltyPerSecondLate = 2;
 
         [Header("Events")]
