@@ -50,7 +50,6 @@ namespace CourierCity.Player
 
         private void OnPackageDelivered(Package pkg)
         {
-            // Point to next carried package's destination, or clear
             if (player.CarriedPackages.Count > 0 && player.CarriedPackages[0].TargetZone != null)
                 SetTarget(player.CarriedPackages[0].TargetZone.transform);
             else
@@ -87,13 +86,11 @@ namespace CourierCity.Player
             Vector3 start = player.transform.position;
             Vector3 end = currentTarget.position;
 
-            // Simple straight line — swap with A* result if pathfinding added
             lr.positionCount = lineSegments;
             for (int i = 0; i < lineSegments; i++)
             {
                 float t = i / (float)(lineSegments - 1);
                 Vector3 pos = Vector3.Lerp(start, end, t);
-                // Slight wave for visual style
                 pos.y += Mathf.Sin(t * Mathf.PI) * 0.3f;
                 lr.SetPosition(i, pos);
             }
