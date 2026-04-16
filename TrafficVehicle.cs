@@ -30,7 +30,7 @@ namespace CourierCity.City
 
         private void OnEnable()
         {
-            // Subscribe to horn event from all players in scene
+
             var players = FindObjectsByType<Player.PlayerController>(FindObjectsSortMode.None);
             foreach (var p in players) p.OnHornUsed += OnHornHeard;
         }
@@ -86,7 +86,7 @@ namespace CourierCity.City
             if (col.gameObject.TryGetComponent<Player.PlayerController>(out var player))
             {
                 if (player.IsInvincible) return;
-                // Knock player back
+
                 Vector2 dir = (col.transform.position - transform.position).normalized;
                 col.rigidbody.AddForce(dir * 8f, ForceMode2D.Impulse);
                 Core.GameManager.Instance?.PenalizeScore(50);
@@ -94,7 +94,7 @@ namespace CourierCity.City
         }
     }
 
-    // ---- Traffic Spawner ----
+
     public class TrafficSpawner : MonoBehaviour
     {
         [SerializeField] private TrafficVehicle[] vehiclePrefabs;
