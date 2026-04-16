@@ -85,7 +85,6 @@ namespace CourierCity.City
         }
     }
 
-    // ---- Crowd Spawner -----
     public class CrowdSpawner : MonoBehaviour
     {
         [SerializeField] private Pedestrian pedestrianPrefab;
