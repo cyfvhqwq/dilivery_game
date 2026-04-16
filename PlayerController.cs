@@ -52,7 +52,6 @@ namespace CourierCity.Player
 
             if (IsSlipping)
             {
-                // Player can't control direction — physics carries momentum
                 rb.linearDamping = 0.5f;
             }
             else
@@ -62,7 +61,7 @@ namespace CourierCity.Player
             }
         }
 
-        // Called by Unity Input System
+
         public void OnMove(InputValue value)
         {
             moveInput = value.Get<Vector2>();
