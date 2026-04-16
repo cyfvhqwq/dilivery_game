@@ -35,7 +35,6 @@ namespace CourierCity.UI
 
         private void Awake()
         {
-            // Build package slots
             for (int i = 0; i < maxSlots; i++)
             {
                 if (packageSlotPrefab == null) break;
