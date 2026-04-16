@@ -33,7 +33,6 @@ namespace CourierCity.Player
             if (!HasPendingDelivery) return;
             if (!other.TryGetComponent<PlayerController>(out var player)) return;
 
-            // Check if player carries the expected package
             foreach (var pkg in player.CarriedPackages)
             {
                 if (pkg == expectedPackage || expectedPackage == null)
