@@ -58,7 +58,6 @@ namespace CourierCity.Core
 
             while (isRunaway && timer > 0f)
             {
-                // Flee from nearest player
                 var players = FindObjectsByType<PlayerController>(FindObjectsSortMode.None);
                 Vector2 fleeDir = Vector2.zero;
 
@@ -71,7 +70,6 @@ namespace CourierCity.Core
                 fleeDir.Normalize();
                 rb.linearVelocity = fleeDir * runawaySpeed;
 
-                // Add random jitter
                 rb.linearVelocity += Random.insideUnitCircle * 1.5f;
 
                 timer -= Time.deltaTime;
@@ -85,7 +83,7 @@ namespace CourierCity.Core
 
         private void AttachToPlayer()
         {
-            // Position above player head; in a full impl, use a socket transform
+
             transform.SetParent(carrier.transform);
             transform.localPosition = new Vector3(0.3f, 0.6f, 0f);
         }
